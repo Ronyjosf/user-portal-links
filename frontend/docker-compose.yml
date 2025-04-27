@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ../backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SESSION_SECRET=your_session_secret_here
+    volumes:
+      - ../backend/database.sqlite:/app/database.sqlite
+      - ../backend:/app
+      - /app/node_modules
+    command: npm run dev
+
+  frontend:
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    command: npm run dev -- --host
+    depends_on:
+      - backend
