@@ -6,6 +6,42 @@ A web application for users to create a personal portal of links. Features user 
 - Backend: Node.js (Express, Passport.js, Sequelize, SQLite)
 - Frontend: React (Vite)
 
+## Authentication System
+
+The application uses a secure, session-based authentication system with the following components:
+
+### User Storage
+- Users are stored in SQLite database using Sequelize ORM
+- Passwords are hashed using bcrypt before storage
+- Each user has a unique username
+
+### Authentication Flow
+- Uses Passport.js with Local Strategy for authentication
+- Session-based authentication with express-session
+- Sessions are stored in SQLite using connect-session-sequelize
+
+### Security Features
+- Password hashing with bcrypt
+- Session secret stored in environment variables
+- CORS configured for secure cross-origin requests
+- Protected API endpoints using authentication middleware
+- User data isolation (users can only access their own links)
+
+### Login Process
+```javascript
+passport.use(new LocalStrategy(async (username, password, done) => {
+  // Find user in database
+  const user = await User.findOne({ where: { username } });
+  if (!user) return done(null, false);
+  
+  // Verify password
+  const valid = await bcrypt.compare(password, user.password);
+  if (!valid) return done(null, false);
+  
+  return done(null, user);
+}));
+```
+
 ## Local Development Setup
 
 ### Prerequisites
