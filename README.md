@@ -20,6 +20,7 @@ The application uses a secure, session-based authentication system with the foll
 - Users are stored in SQLite database using Sequelize ORM
 - Passwords are hashed using bcrypt before storage
 - Each user has a unique username
+- you can browse data using sqlite3 database browser
 
 ### Authentication Flow
 - Uses Passport.js with Local Strategy for authentication
