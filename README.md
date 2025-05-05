@@ -7,7 +7,7 @@ A web application for users to create a personal portal of links. Features user 
 - Frontend: `npm run dev`
 
 you should see the frontend running on http://localhost:5173 and the backend running on http://localhost:5000
-
+first user is: test1, test
 ## Stack
 - Backend: Node.js (Express, Passport.js, Sequelize, SQLite)
 - Frontend: React (Vite)
