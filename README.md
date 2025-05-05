@@ -2,6 +2,12 @@
 
 A web application for users to create a personal portal of links. Features user registration, login, and personal dashboard for managing links.
 
+## Run
+- Backend: `npm run dev`
+- Frontend: `npm run dev`
+
+you should see the frontend running on http://localhost:5173 and the backend running on http://localhost:5000
+
 ## Stack
 - Backend: Node.js (Express, Passport.js, Sequelize, SQLite)
 - Frontend: React (Vite)
