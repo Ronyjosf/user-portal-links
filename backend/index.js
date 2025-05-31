@@ -15,9 +15,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Database setup
-const sequelize = new SequelizeClass({
-  dialect: 'sqlite',
-  storage: './database.sqlite',
+const sequelize = new SequelizeClass(process.env.DATABASE_URL || {
+  dialect: 'postgres',
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  username: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASSWORD || 'postgres',
+  database: process.env.DB_NAME || 'user_portal',
   logging: false,
 });
 

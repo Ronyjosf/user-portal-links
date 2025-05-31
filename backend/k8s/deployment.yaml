@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-portal-backend
+  labels:
+    app: user-portal-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-portal-backend
+  template:
+    metadata:
+      labels:
+        app: user-portal-backend
+    spec:
+      containers:
+      - name: backend
+        image: user-portal-backend:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          value: "5000"
+        - name: NODE_ENV
+          value: "production"
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: user-portal-secrets
+              key: session-secret
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: user-portal-config
+              key: database-url
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"

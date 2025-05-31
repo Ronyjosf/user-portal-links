@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-portal-frontend
+  labels:
+    app: user-portal-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-portal-frontend
+  template:
+    metadata:
+      labels:
+        app: user-portal-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: user-portal-frontend:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5173
+        env:
+        - name: VITE_API_URL
+          value: "http://user-portal-backend"  # Use Kubernetes service name
